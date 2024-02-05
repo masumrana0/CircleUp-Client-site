@@ -58,10 +58,10 @@ const DarkmodeToggle = () => {
   const defaultValue = "system";
 
   return (
-    <Space className="w-full">
+    <Space className="w-full  flex justify-end">
       <Select
         defaultValue={defaultValue}
-        style={{ width: "100%" }}
+        style={{ width: "100% !important" }}
         onChange={handleChange}
         options={SelectOption}
       />

@@ -9,13 +9,13 @@ import MobileStory from "@/Components/home/MobileStory";
 const AfterLoginHomePage = () => {
   return (
     <div>
-      <section className="w-full lg:max-w-[1400px] mx-auto pt-4 ">
+      <section className="w-full lg:max-w-[1400px] mx-auto pt-2 lg:pt-24 ">
         <div className="lg:grid lg:grid-cols-5 md:grid md:grid-cols-3 gap-4">
-          <div className="hidden lg:block lg:col-span-1 md:col-span-1 sticky top-0 h-[90vh]">
+          <div className="hidden md:block lg:block lg:col-span-1 md:col-span-1  sticky top-24 h-[50vh] z-20">
             <LeftSideBar />
           </div>
-          <div className="block lg:hidden  ">
-            <div className="flex my-2 gap-3 px-2 overflow-x-auto ">
+          <div className="block md:hidden lg:hidden  ">
+            <div className="flex mb-2 gap-3 px-2 overflow-x-auto ">
               <MobileStory name="Story" me={true} />
               <MobileStory name="Samad.." />
               <MobileStory name="Kobir" />
@@ -29,7 +29,7 @@ const AfterLoginHomePage = () => {
           <div className="lg:col-span-3 md:col-span-1">
             <MainFeed />
           </div>
-          <div className="hidden lg:block lg:col-span-1 md:col-span-1 sticky top-0 h-[90vh]">
+          <div className="hidden md:block lg:block lg:col-span-1 md:col-span-1 sticky top-24 h-[50vh] z-20">
             <RightSideBar />
           </div>
         </div>

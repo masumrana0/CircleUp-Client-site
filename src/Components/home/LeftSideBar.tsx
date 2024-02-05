@@ -9,7 +9,7 @@ import Weather from "../newsfeed/Wealther/Weather";
 const LeftSideBar = () => {
   return (
     <section>
-      <div className="flex flex-col   gap-4 min-h-[90vh]">
+      <div className="flex flex-col   gap-4 ">
         {/* Weather card */}
         {/* <div>
           <Weather />

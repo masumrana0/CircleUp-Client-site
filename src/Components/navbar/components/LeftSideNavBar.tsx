@@ -18,8 +18,8 @@ import Link from "next/link";
 const LeftSideNavBar = () => {
   const [navbarState, setNavbarState] = useState(1);
   return (
-    <div className="flex  items-center gap-4 justify-between md:ml-20">
-      <div className="flex  items-center gap-4 md:gap-40 justify-between ">
+    <div className="flex  ml-0  items-center gap-4 justify-between md:ml-20">
+      <div className="w-full flex  items-center gap-4 md:gap-40 justify-between px-4 lg;px-0 ">
         <Link href="/home">
           <RiHome5Fill
             onClick={() => setNavbarState(1)}

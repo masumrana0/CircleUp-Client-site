@@ -48,7 +48,7 @@ const DarkmodeToggle = () => {
   const SelectOption = options.map((option) => ({
     value: option.text,
     label: (
-      <span className="flex justify-center items-center gap-1">
+      <span className="w-full flex justify-center items-center gap-1">
         {option.icon}
         {option.text}
       </span>
@@ -58,10 +58,10 @@ const DarkmodeToggle = () => {
   const defaultValue = "system";
 
   return (
-    <Space>
+    <Space className="w-full">
       <Select
         defaultValue={defaultValue}
-        style={{ width: 100 }}
+        style={{ width: "100%" }}
         onChange={handleChange}
         options={SelectOption}
       />

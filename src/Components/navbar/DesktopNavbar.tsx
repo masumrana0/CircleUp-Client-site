@@ -3,7 +3,6 @@
  * Description: ''
  * Author: 'Masum Rana'
  * Date: 29-01-2024
- *
  */
 
 "use client";
@@ -17,11 +16,8 @@ import Link from "next/link";
 
 const DesktopNavbar = () => {
   return (
-    <header
-      className="flex justify-between gap-5 shadow-lg  px-10 items-center
-    py-3"
-    >
-      <div className="w-[60px]  hidden md:block  p-1 rounded lg:flex gap-2 items-center ">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-between gap-5 shadow-lg px-10 items-center py-3 bg-white">
+      <div className="w-[60px] hidden md:block p-1 rounded lg:flex gap-2 items-center">
         <Image
           src={logo}
           alt="profile picture "
@@ -29,13 +25,18 @@ const DesktopNavbar = () => {
           height={50}
           className="rounded-full"
         />
-
-        <div className="hidden  md:block">
+        <Link
+          href="/home"
+          className="text-xl text-violet-600 font-black font_montserrat"
+        >
+          CircleUp
+        </Link>
+        {/* <div className="hidden md:block">
           <NavbarSearchBar />
-        </div>
+        </div> */}
       </div>
 
-      <nav className="flex ">
+      <nav className="flex">
         <LeftSideNavBar />
       </nav>
       <nav>

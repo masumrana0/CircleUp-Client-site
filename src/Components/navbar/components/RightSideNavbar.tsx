@@ -1,15 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import NavbarSearchBar from "./NavbarSearchBar";
 import DarkmodeToggle from "./DarkmodeToggle";
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Space } from "antd";
+import { Avatar, Divider, Space } from "antd";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { setOpenDrawer } from "@/Redux/Slices/navbarSlice";
 import NavbarProfileDrawer from "./NavbarProfileDrawer";
+import { FaRegBookmark } from "react-icons/fa6";
+import { IoMdHelpBuoy, IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineHideSource } from "react-icons/md";
+import { IoSettings } from "react-icons/io5";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 
 const RightSideNavbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   // redux
   const dispatch = useAppDispatch();
   // const isOpen = useAppSelector((state) => state.navbarSlice.drawerOpen);
@@ -17,16 +24,63 @@ const RightSideNavbar = () => {
   return (
     <div className="flex items-center gap-6">
       <div className="hidden md:block">
-        <DarkmodeToggle />
-      </div>
-      <div className="hidden md:block">
-        <button onClick={() => dispatch(setOpenDrawer(true))}>
+        <button onClick={() => setIsOpen(!isOpen)}>
           <Space wrap size={16}>
             <Avatar size={45} icon={<UserOutlined />} />
           </Space>
         </button>
         <div className=" ">
-          <NavbarProfileDrawer width="250" />
+          <div className="absolute w-[200px] right-16 z-10">
+            {isOpen ? (
+              <>
+                <div className="bg-gray-200 rounded-md p-3 ">
+                  <div className="flex flex-col">
+                    {/* Profile  */}
+                    <div>
+                      <div className=" hover:bg-slate-100 p-2 rounded-md cursor-pointer flex justify-center items-center gap-2">
+                        <p className="text-sm">Theme</p>
+                        <DarkmodeToggle />
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Profile  */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                        <CgProfile className="" />
+                        <p className="text-sm">Profile</p>
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Setting */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                        <IoSettings className="" />
+                        <p className="text-sm">Setting</p>
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Help */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                        <IoMdHelpBuoy className="text-xl" />
+                        <p className="text-sm">Help</p>
+                      </div>
+                      <Divider className="my-2" />
+                    </div>
+                    {/* Logout */}
+                    <div>
+                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
+                        <RiLogoutCircleLine className="text-xl" />
+                        <p className="text-sm">Logout</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
     </div>

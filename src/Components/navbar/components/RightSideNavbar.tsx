@@ -14,6 +14,7 @@ import { MdOutlineHideSource } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import Link from "next/link";
 
 const RightSideNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ const RightSideNavbar = () => {
               <>
                 <div className="bg-gray-200 rounded-md p-3 ">
                   <div className="flex flex-col">
-                    {/* Profile  */}
+                    {/* Theme  */}
                     <div>
                       <div className=" hover:bg-slate-100 p-2 rounded-md cursor-pointer flex justify-center items-center gap-2">
                         <p className="text-sm">Theme</p>
@@ -47,7 +48,9 @@ const RightSideNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <CgProfile className="" />
-                        <p className="text-sm">Profile</p>
+                        <Link href="/profile" className="text-sm">
+                          Profile
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>
@@ -55,7 +58,9 @@ const RightSideNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <IoSettings className="" />
-                        <p className="text-sm">Setting</p>
+                        <Link href="/setting" className="text-sm">
+                          Setting
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>
@@ -63,7 +68,9 @@ const RightSideNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <IoMdHelpBuoy className="text-xl" />
-                        <p className="text-sm">Help</p>
+                        <Link href="/help" className="text-sm">
+                          Help
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>

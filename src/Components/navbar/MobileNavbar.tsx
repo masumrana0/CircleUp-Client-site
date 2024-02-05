@@ -59,7 +59,9 @@ const MobileNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <CgProfile className="" />
-                        <p className="text-sm">Profile</p>
+                        <Link href="/profile" className="text-sm">
+                          Profile
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>
@@ -67,7 +69,9 @@ const MobileNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <IoSettings className="" />
-                        <p className="text-sm">Setting</p>
+                        <Link href="/setting" className="text-sm">
+                          Setting
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>
@@ -75,7 +79,9 @@ const MobileNavbar = () => {
                     <div>
                       <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
                         <IoMdHelpBuoy className="text-xl" />
-                        <p className="text-sm">Help</p>
+                        <Link href="/help" className="text-sm">
+                          Help
+                        </Link>
                       </div>
                       <Divider className="my-2" />
                     </div>

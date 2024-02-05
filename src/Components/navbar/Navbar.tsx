@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="hidden md:block">
         <DesktopNavbar />
       </div>
-      <div className="lg:hidden ">
+      <div className="lg:hidden pt-2">
         <MobileNavbar />
       </div>
     </div>

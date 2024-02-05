@@ -11,6 +11,10 @@
   font-family: "Rubik Pixels", system-ui;
 }
 
+body {
+  background-color: #f4f4f4;
+}
+
 /* :root {
   --tw-gradient-stops: red, yellow, green;
 } */

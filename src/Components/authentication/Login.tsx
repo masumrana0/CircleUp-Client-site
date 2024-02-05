@@ -10,35 +10,36 @@
 import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Checkbox, Form, Input } from "antd";
-import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { changeAuthState } from "@/Redux/Slices/authSlice";
-import { useLoginMutation } from "@/Redux/api/authApi";
 import Notification from "../shared/Notification";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/Redux/hooks";
+import { useLoginMutation } from "@/Redux/api/authApi";
+import { changeAuthState } from "@/Redux/Slices/authSlice";
+import { setToLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/storageKey";
 
 const Login: React.FC = () => {
   const router = useRouter();
-  // reudx
+  // redux
   const dispatch = useAppDispatch();
   const [setLogin] = useLoginMutation();
 
   const onFinish = async (values: any) => {
     const res = await setLogin(values);
-    console.log(res);
 
-    if (res?.data?.success) {
+    if ("data" in res && res.data?.accessToken) {
+      setToLocalStorage(authKey, res.data.accessToken);
+      router.push("/home");
       Notification({
-        description: "User Successfully Logged in",
+        description: "User Successfully Logedin",
         placement: "bottomRight",
       });
-      router.push("/home");
     } else {
       Notification({
-        description: "Something is went wrong.",
+        description: "Something is wrong",
         placement: "bottomLeft",
       });
     }
-    console.log(values);
   };
 
   return (

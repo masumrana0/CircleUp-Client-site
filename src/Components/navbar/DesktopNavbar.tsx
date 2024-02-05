@@ -10,20 +10,38 @@
 import React, { useState } from "react";
 import LeftSideNavBar from "./components/LeftSideNavBar";
 import RightSideNavbar from "./components/RightSideNavbar";
+import Image from "next/image";
+import logo from "/public/logo.jpg";
+import NavbarSearchBar from "./components/NavbarSearchBar";
+import Link from "next/link";
 
 const DesktopNavbar = () => {
   return (
-    <div
-      className="flex justify-between gap-5 shadow-lg  px-10 
-    py-3 dark:bg-dark "
+    <header
+      className="flex justify-between gap-5 shadow-lg  px-10 items-center
+    py-3"
     >
-      <nav>
+      <div className="w-[60px]  hidden md:block  p-1 rounded lg:flex gap-2 items-center ">
+        <Image
+          src={logo}
+          alt="profile picture "
+          width={50}
+          height={50}
+          className="rounded-full"
+        />
+
+        <div className="hidden  md:block">
+          <NavbarSearchBar />
+        </div>
+      </div>
+
+      <nav className="flex ">
         <LeftSideNavBar />
       </nav>
       <nav>
         <RightSideNavbar />
       </nav>
-    </div>
+    </header>
   );
 };
 

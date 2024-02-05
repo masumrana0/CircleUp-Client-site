@@ -13,16 +13,17 @@ import { Form, Input, DatePicker } from "antd";
 import { useAppDispatch } from "@/Redux/hooks";
 import { changeAuthState } from "@/Redux/Slices/authSlice";
 import { useRegisterMutation } from "@/Redux/api/authApi";
-import { IUser } from "@/types/auth";
+import { ILoginUserResponse, IUser } from "@/types/auth";
 import Notification from "../shared/Notification";
 import { useRouter } from "next/navigation";
+import { setToLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/storageKey";
 
 const Register: React.FC = () => {
   // redux
   const dispatch = useAppDispatch();
   const [setRegister, options] = useRegisterMutation();
   const router = useRouter();
-
   const onFinish = async (values: any) => {
     const user: IUser = {
       name: {
@@ -33,17 +34,20 @@ const Register: React.FC = () => {
       // dateOfBirtch:values.
       password: values.password,
     };
-    // console.log(user);
     const res = await setRegister(user);
-    if (res?.data?.success) {
+    console.log(res);
+    
+
+    if ("data" in res && res.data?.accessToken) {
+      setToLocalStorage(authKey, res.data.accessToken);
+      router.push("/home");
       Notification({
-        description: "User Successfully Registred",
+        description: "User Successfully Registered",
         placement: "bottomRight",
       });
-      router.push("/verification");
     } else {
       Notification({
-        description: "SomeThing is wrong",
+        description: "Something is wrong",
         placement: "bottomLeft",
       });
     }

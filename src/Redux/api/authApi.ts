@@ -1,19 +1,20 @@
+import { ILoginUserResponse } from "@/types/auth";
 import { baseApi } from "./baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    register: build.mutation({
-      query: (user: any) => ({
+    register: build.mutation<ILoginUserResponse, unknown>({
+      query: (user) => ({
         url: "/auth/register",
         method: "POST",
         data: user,
       }),
     }),
-    login: build.mutation({
-      query: (user: any) => ({
+    login: build.mutation<ILoginUserResponse, unknown>({
+      query: (loginData: any) => ({
         url: "/auth/login",
         method: "POST",
-        data: user,
+        data: loginData,
       }),
     }),
   }),

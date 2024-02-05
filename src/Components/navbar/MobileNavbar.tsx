@@ -1,8 +1,10 @@
-import Image from "next/image";
 import React from "react";
-import logo from "/public/logo.jpg";
+import Image from "next/image";
+
 import LeftSideNavBar from "./components/LeftSideNavBar";
 import MobileNavRight from "./components/MobileNavRight";
+
+const logo: string = "/logo.jpg";
 
 const MobileNavbar = () => {
   return (

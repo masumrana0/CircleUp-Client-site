@@ -8,3 +8,8 @@ export type IUser = {
   email: string;
   password: string;
 };
+
+export type ILoginUserResponse = {
+  accessToken?: string;
+  isEmailVerified?: boolean;
+};

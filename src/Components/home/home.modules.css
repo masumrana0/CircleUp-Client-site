@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mulish:ital,wght@1,200&family=Raleway&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+.user_heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.user_sub_heading {
+  font-family: "Raleway", sans-serif;
+}
+
+.font_raleway {
+  font-family: "Raleway", sans-serif;
+}
+.font_montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.color_primary {
+  color: #6d27da;
+}
+.color_dark_1 {
+  color: #393a4f;
+}
+.color_dark_2 {
+  color: #757a91;
+}

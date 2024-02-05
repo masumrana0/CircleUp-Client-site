@@ -6,10 +6,6 @@ import {
   setToLocalStorage,
 } from "@/utils/local-storage";
 
-// import { removeUserInfo } from "@/services/auth.service";
-
-// import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
-
 import axios from "axios";
 
 const instance = axios.create();

@@ -25,7 +25,7 @@ const NavbarSearchBar: React.FC = () => (
       placeholder="Search"
       allowClear
       onSearch={onSearch}
-      style={{ width: 350 }}
+      style={{ width: 250 }}
     />
   </Space>
 );

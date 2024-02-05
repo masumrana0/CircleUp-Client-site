@@ -16,10 +16,6 @@ const RightSideNavbar = () => {
 
   return (
     <div className="flex items-center gap-6">
-      <div className="hidden  md:block">
-        <NavbarSearchBar />
-      </div>
-
       <div className="hidden md:block">
         <DarkmodeToggle />
       </div>

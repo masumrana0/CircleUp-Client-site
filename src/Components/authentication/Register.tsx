@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { setToLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/storageKey";
 
-const Register: React.FC = () => {
+const Register = () => {
   // redux
   const dispatch = useAppDispatch();
   const [setRegister, options] = useRegisterMutation();
@@ -36,7 +36,6 @@ const Register: React.FC = () => {
     };
     const res = await setRegister(user);
     console.log(res);
-    
 
     if ("data" in res && res.data?.accessToken) {
       setToLocalStorage(authKey, res.data.accessToken);
@@ -54,8 +53,10 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="lg:w-[500px] border p-10 shadow-lg shadow-violet-500 rounded-lg">
-      <h2 className="text-center font-bold text-5xl mb-10 ">Register</h2>
+    <div className="lg:w-[600px]  p-10 shadow-sm bg-transparent shadow-violet-500 rounded-lg">
+      <h2 className="text-center font-bold text-5xl mb-10  text-violet-500">
+        Register
+      </h2>
       <Form
         name="normal_register"
         className="register-form"
@@ -147,14 +148,14 @@ const Register: React.FC = () => {
           </button>
         </Form.Item>
       </Form>
-      <div>
-        <span className="font-semibold">
-          Already Have an Account Please{" "}
+      <div className="flex items-center">
+        <span className="font-semibold text-gray-100">
+          Already Have an Account?{" "}
           <button
             onClick={() => dispatch(changeAuthState())}
-            className="text-blue-400 underline "
+            className="hover:text-violet-400 text-violet-400  underline ml-2 text-sm "
           >
-            Login
+            Please Login
           </button>{" "}
         </span>
       </div>

@@ -1,32 +1,33 @@
 "use client";
-import { Avatar, Button, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
-import { BiSolidLike } from "react-icons/bi";
-import { FaComment, FaRegComment } from "react-icons/fa";
-import { IoSend } from "react-icons/io5";
-import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import { Avatar, Button, Divider } from "antd";
 import Link from "next/link";
-import PostCommentBox from "../shared/PostCommentBox";
+import { useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
+import { FaRegComment } from "react-icons/fa";
+
 import { IPost } from "@/types/newsfeed";
-import Image from "next/image";
-import img from "/public/unnamed.webp";
-import Reactions from "@/Components/newsfeed/reaction/Reaction";
 import { Dropdown } from "antd";
-import like from "/public/assets/reaction/like.png";
+import Image from "next/image";
+import PostCommentBox from "../shared/PostCommentBox";
+import img from "/public/unnamed.webp";
+
 import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
-import { useAppDispatch } from "@/Redux/hooks";
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
-import { RiShareForwardLine } from "react-icons/ri";
-import { TbShare3 } from "react-icons/tb";
-import { CiBookmark } from "react-icons/ci";
+import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { FaRegBookmark } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineHideSource } from "react-icons/md";
-import { FaRegBookmark } from "react-icons/fa6";
+import { TbShare3 } from "react-icons/tb";
 
 const FeedCard = ({ data }: { data: IPost }) => {
-  const [open, setOpen] = useState(false);
-  console.log(open);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { reaction } = useAppSelector((state) => state.reaction);
+  console.log(reaction);
+
+  const { data: comments } = useGetAllCommentQuery(data._id);
 
   const dispatch = useAppDispatch();
   dispatch(setPostId(data?._id as string));
@@ -52,7 +53,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
         </div>
         <div className="relative">
           <Button
-            onClick={() => setOpen(!open)}
+            onClick={() => setIsOpen(!isOpen)}
             shape="circle"
             className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
           >
@@ -63,7 +64,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
           {/* TODO: make reusable popup card    */}
           <div className="absolute w-[200px] right-6">
-            {open ? (
+            {isOpen ? (
               <>
                 <div className="bg-gray-200 rounded-md p-3">
                   <div className="flex flex-col">
@@ -104,7 +105,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
         <div>
           <p className="font-light text-sm my-2">{data?.postText}</p>
         </div>
-        <Link href={`/photo/id`}>
+        <Link href={`/photo/${data._id}`}>
           <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
             <Image src={img} width={300} height={300} alt="user post img" />
           </div>
@@ -120,19 +121,25 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
-                  src={like}
+                  src={
+                    reaction
+                      ? `/assets/reaction/${reaction}.png`
+                      : "/assets/reaction/likeOutline.png"
+                  }
                   width={20}
                   height={20}
                   alt="like icon"
                   className=" transion-all duration-300"
                 />
-                <h2>Like</h2>
+                <h2>{reaction ? reaction : "Like"} </h2>
               </div>
             </Dropdown>
           </div>
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
-          <small className="text-center  mb-2">4 comments</small>
+          <div className="text-center text-sm  mb-2">
+            {comments?.length} {comments?.length <= 1 ? "comment" : "comments"}
+          </div>
           <hr />
           <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
             <button

@@ -10,7 +10,7 @@ const Comment = ({ comment }: { comment: IComment }) => {
       <Avatar className="border " size="large" icon={<UserOutlined />} />
       <div>
         <div>
-          <div className="bg-gray-200 p-2 rounded-md mt-2 ">
+          <div className="bg-gray-300 p-2 rounded-md mt-2 ">
             <h1 className="font-bold color_dark_1">John Smith</h1>
             <p className="text-sm   color_dark_2">{comment?.comment}</p>
           </div>

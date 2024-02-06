@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["www.gravatar.com"],
+    domains: ["www.gravatar.com"], // Add the domain here
   },
   async headers() {
     return [

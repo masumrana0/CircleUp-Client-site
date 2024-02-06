@@ -4,8 +4,7 @@
  * Author: 'Masum Rana'
  * Date: 04-02-2024
  *
-*/
-
+ */
 
 import { IReaction } from "@/types/newsfeed";
 import { baseApi } from "./baseApi";
@@ -21,9 +20,9 @@ const commentApi = baseApi.injectEndpoints({
       invalidatesTags: ["reaction"],
     }),
 
-    getAllRection: build.query({
-      query: (postid) => ({
-        url: `/raction/${postid}`,
+    getAllReaction: build.query({
+      query: (postId) => ({
+        url: `/reaction/${postId}`,
         method: "GET",
       }),
       providesTags: ["reaction"],
@@ -32,4 +31,4 @@ const commentApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useSubmitReactionMutation, useGetAllRectionQuery } = commentApi;
+export const { useSubmitReactionMutation, useGetAllReactionQuery } = commentApi;

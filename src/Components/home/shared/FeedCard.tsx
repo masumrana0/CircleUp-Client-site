@@ -24,8 +24,10 @@ import { TbShare3 } from "react-icons/tb";
 const FeedCard = ({ data }: { data: IPost }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const theme = useAppSelector((state) => state.themeSlice.theme);
+
   const { reaction } = useAppSelector((state) => state.reaction);
-  console.log(reaction);
+  // console.log(reaction);
 
   const { data: comments } = useGetAllCommentQuery(data._id);
 
@@ -34,7 +36,9 @@ const FeedCard = ({ data }: { data: IPost }) => {
   const [showComments, setShowComments] = useState(false);
 
   return (
-    <section className="bg-white p-4 rounded-md">
+    <section
+      className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+    >
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
           <Avatar

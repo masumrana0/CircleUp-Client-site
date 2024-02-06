@@ -15,12 +15,17 @@ import { IoSettings } from "react-icons/io5";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
+import { toggleThemeMode } from "@/Redux/Slices/themeSlice";
 
 const RightSideNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   // redux
   const dispatch = useAppDispatch();
-  // const isOpen = useAppSelector((state) => state.navbarSlice.drawerOpen);
+  const theme = useAppSelector((state) => state.themeSlice.theme);
+
+  const handleToggleTheme = () => {
+    dispatch(toggleThemeMode(theme === "light" ? "dark" : "light"));
+  };
 
   return (
     <div className="flex items-center gap-6">
@@ -40,7 +45,7 @@ const RightSideNavbar = () => {
                     <div>
                       <div className=" hover:bg-slate-100 p-2 rounded-md cursor-pointer flex justify-center items-center gap-2">
                         <p className="text-sm">Theme</p>
-                        <DarkmodeToggle />
+                        <DarkmodeToggle handleToggleTheme={handleToggleTheme} />
                       </div>
                       <Divider className="my-2" />
                     </div>

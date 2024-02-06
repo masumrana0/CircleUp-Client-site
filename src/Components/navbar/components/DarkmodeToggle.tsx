@@ -7,7 +7,7 @@ import { Select, Space } from "antd";
 
 const shouldRenderOnServer = typeof window === "undefined";
 
-const DarkmodeToggle = () => {
+const DarkmodeToggle = ({ handleToggleTheme }: any) => {
   // Local State
   const [localThemeState, setLocalThemeState] = useState(false);
   // Redux
@@ -21,15 +21,6 @@ const DarkmodeToggle = () => {
     // setLocalThemeState(themeState);
   }, []);
 
-  // Event Handling
-  const handleToggleClick = () => {
-    // dispatch(toggleThemeMode());
-  };
-
-  const handleChange = (value: string) => {
-    console.log(value);
-  };
-
   const options = [
     {
       icon: <BsBrightnessHigh />,
@@ -38,10 +29,6 @@ const DarkmodeToggle = () => {
     {
       icon: <FaMoon />,
       text: "dark",
-    },
-    {
-      icon: <FaDesktop />,
-      text: "system",
     },
   ];
 
@@ -55,14 +42,14 @@ const DarkmodeToggle = () => {
     ),
   }));
 
-  const defaultValue = "system";
+  const defaultValue = "dark";
 
   return (
     <Space className="w-full  flex justify-end">
       <Select
         defaultValue={defaultValue}
         style={{ width: "100% !important" }}
-        onChange={handleChange}
+        onChange={(value) => handleToggleTheme(value)}
         options={SelectOption}
       />
     </Space>

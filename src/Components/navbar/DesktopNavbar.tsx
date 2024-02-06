@@ -13,10 +13,14 @@ import Image from "next/image";
 import logo from "/public/logo.jpg";
 import NavbarSearchBar from "./components/NavbarSearchBar";
 import Link from "next/link";
+import { useAppSelector } from "@/Redux/hooks";
 
 const DesktopNavbar = () => {
+  const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-between gap-5 shadow-lg px-10 items-center py-3 bg-white">
+    <header
+      className={`${theme === "light" ? "bg-gray-900" : "bg-white"} fixed top-0 left-0 right-0 z-50 flex justify-between gap-5 shadow-lg px-10 items-center py-3 `}
+    >
       <div className="w-[60px] hidden md:block p-1 rounded lg:flex gap-2 items-center">
         <Image
           src={logo}

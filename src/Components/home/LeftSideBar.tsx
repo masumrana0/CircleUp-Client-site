@@ -5,8 +5,10 @@ import { FaBookmark, FaLocationDot, FaRegBookmark } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Weather from "../newsfeed/Wealther/Weather";
+import { useAppSelector } from "@/Redux/hooks";
 
 const LeftSideBar = () => {
+  const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
       <div className="flex flex-col   gap-4 ">
@@ -86,7 +88,9 @@ const LeftSideBar = () => {
         </div> */}
 
         {/* Latest activity */}
-        <div className="bg-white p-4 rounded-md ">
+        <div
+          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+        >
           <div>
             <div className="flex justify-between items-center ">
               <h1 className="font_montserrat">Latest Activity</h1>

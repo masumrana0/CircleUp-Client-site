@@ -7,10 +7,12 @@ import { MdPermMedia } from "react-icons/md";
 import { FaSmile } from "react-icons/fa";
 import { useSubmitPostMutation } from "@/Redux/api/postApi";
 import { IPost } from "@/types/newsfeed";
+import { useAppSelector } from "@/Redux/hooks";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("");
   const [submitPost, options] = useSubmitPostMutation();
+  const theme = useAppSelector((state) => state.themeSlice.theme);
 
   const handleSubmitPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,31 +34,34 @@ const FeedPostCard = () => {
   };
 
   return (
-    <Card title="What's on your mind?" bordered={false}>
-      <form onSubmit={handleSubmitPost}>
-        <div className="flex items-center">
-          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
-          <Input
+    <div
+      className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} rounded-md p-4`}
+    >
+      <form
+        className="flex justify-between items-center"
+        onSubmit={handleSubmitPost}
+      >
+        <div className="flex w-full mr-2 items-center gap-2 justify-center">
+          <Avatar
+            className="w-full"
+            src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+          />
+          <input
             name="post"
+            className="w-full outline-none p-2 rounded-md"
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
-            placeholder="Write something"
-            variant="borderless"
+            placeholder="What's on your mind?"
           />
         </div>
-        <div className="mt-8 flex justify-between items-center">
-          <div className="flex gap-2 text-xl">
-            <FaSmile /> <MdPermMedia />
-          </div>
-          <button
-            type="submit"
-            className="px-5 text-md py-1 font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
-          >
-            Post
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="px-5 text-md py-2 font-bold text-white rounded bg-violet-500 hover:bg-violet-800 transition-colors duration-300"
+        >
+          Post
+        </button>
       </form>
-    </Card>
+    </div>
   );
 };
 

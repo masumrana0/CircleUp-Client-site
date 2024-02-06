@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-  id: null;
-  React: null;
+  reaction: string;
 }
 
 const initialState: IInitialState = {
-  id: null,
-  React: null,
+  reaction: "",
 };
 
 export const reactionSlice = createSlice({
@@ -16,8 +14,7 @@ export const reactionSlice = createSlice({
   initialState,
   reducers: {
     setReaction: (state, action) => {
-      state.id = action.payload.reaction.id;
-      state.React = action.payload.reaction.reaction;
+      state.reaction = action.payload;
     },
   },
 });

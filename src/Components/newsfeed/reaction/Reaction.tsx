@@ -42,9 +42,9 @@ const ReactionLabel = () => {
         post: id,
         reaction: React,
       };
-      console.log(reaction);
+      // console.log(reaction);
 
-      dispatch(setReaction(reaction));
+      dispatch(setReaction(reaction.reaction));
 
       const res = await await submitReaction(reaction);
       // if (res?.data) {

@@ -1,15 +1,22 @@
-import { Avatar, Button, Modal, Upload } from "antd";
+"use client";
+import { Avatar, Button, Divider, Modal, Upload } from "antd";
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { FaGift, FaPlus } from "react-icons/fa6";
+import { MdOutlineHideSource, MdOutlinePeopleAlt } from "react-icons/md";
+import { FaGift, FaPlus, FaRegBookmark } from "react-icons/fa6";
+import { useAppSelector } from "@/Redux/hooks";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const RightSideBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
       <div className="flex flex-col gap-4  ">
-        <div className="bg-white p-4 rounded-md">
+        <div
+          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+        >
           <div>
             <div className="flex justify-between  items-center">
               <h1 className="font_montserrat">Stories</h1>
@@ -90,18 +97,61 @@ const RightSideBar = () => {
         </div>
 
         {/* Suggested friend */}
-        <div className="bg-white p-4 rounded-md">
+        <div
+          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+        >
           <div>
             <div className="flex justify-between items-center ">
               <h1 className="font_montserrat">Suggested Friends</h1>
-              <Button
-                shape="circle"
-                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-              >
-                <span>
-                  <BsThreeDotsVertical className="font-bold" />
-                </span>
-              </Button>
+
+              <div className="relative">
+                <Button
+                  onClick={() => setIsOpen(!isOpen)}
+                  shape="circle"
+                  className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                >
+                  <span>
+                    <BsThreeDotsVertical className="font-bold" />
+                  </span>
+                </Button>
+
+                {/* TODO: make reusable popup card    */}
+                <div className="absolute w-[200px] right-6">
+                  {isOpen ? (
+                    <>
+                      <div className="bg-gray-200 rounded-md p-3 z-10 ">
+                        <div className="flex flex-col">
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <FaRegBookmark className="" />
+                              <p className="text-sm">Save Post</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Notification Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <IoMdNotificationsOutline className="text-xl" />
+                              <p className="text-sm">Turn Off Notification</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
+                              <MdOutlineHideSource className="text-xl" />
+                              <p className="text-sm">Hide Post</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}

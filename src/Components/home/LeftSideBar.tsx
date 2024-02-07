@@ -1,13 +1,16 @@
-import { Avatar, Button } from "antd";
+"use client";
+import { Avatar, Button, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
 import { FaBookmark, FaLocationDot, FaRegBookmark } from "react-icons/fa6";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { MdOutlineHideSource, MdOutlineRemoveRedEye } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Weather from "../newsfeed/Wealther/Weather";
 import { useAppSelector } from "@/Redux/hooks";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 const LeftSideBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
@@ -93,15 +96,59 @@ const LeftSideBar = () => {
         >
           <div>
             <div className="flex justify-between items-center ">
-              <h1 className="font_montserrat">Latest Activity</h1>
-              <Button
-                shape="circle"
-                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              <h1
+                className={`${theme === "light" ? "text-white" : " text-gray-900"} font_montserrat`}
               >
-                <span>
-                  <BsThreeDotsVertical className="font-bold" />
-                </span>
-              </Button>
+                Latest Activity
+              </h1>
+              <div className="relative">
+                <Button
+                  onClick={() => setIsOpen(!isOpen)}
+                  shape="circle"
+                  className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                >
+                  <span>
+                    <BsThreeDotsVertical className="font-bold" />
+                  </span>
+                </Button>
+
+                {/* TODO: make reusable popup card    */}
+                <div className="absolute w-[200px] right-6">
+                  {isOpen ? (
+                    <>
+                      <div className="bg-gray-200 rounded-md p-3 z-10 ">
+                        <div className="flex flex-col">
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <FaRegBookmark className="" />
+                              <p className="text-sm">Save Post</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Notification Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <IoMdNotificationsOutline className="text-xl" />
+                              <p className="text-sm">Turn Off Notification</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
+                              <MdOutlineHideSource className="text-xl" />
+                              <p className="text-sm">Hide Post</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
             <hr className="mt-2" />
             {/* section 1 */}
@@ -109,10 +156,14 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat color_dark_1">
+                  <span
+                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
+                  >
                     Css Ninja
                   </span>
-                  <small className="font-light color_dark_2 user_sub_heading">
+                  <small
+                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
+                  >
                     3 hours ago
                   </small>
                 </div>
@@ -126,10 +177,14 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat color_dark_1">
+                  <span
+                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
+                  >
                     Css Ninja
                   </span>
-                  <small className="font-light color_dark_2  user_sub_heading">
+                  <small
+                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
+                  >
                     3 hours ago
                   </small>
                 </div>
@@ -143,10 +198,14 @@ const LeftSideBar = () => {
               <div className="flex gap-2 items-center">
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
-                  <span className="text-sm font_montserrat color_dark_1">
+                  <span
+                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
+                  >
                     Css Ninja
                   </span>
-                  <small className="font-light color_dark_2 user_sub_heading">
+                  <small
+                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
+                  >
                     3 hours ago
                   </small>
                 </div>

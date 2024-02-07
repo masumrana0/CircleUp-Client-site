@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfilePage = () => {
   return (
-    <section className="container mx-auto pt-4 lg:pt-24">
+    <section className="container mx-auto pt-4 lg:pt-24 min-h-screen">
       <h1 className="text-center">Profile Page</h1>
     </section>
   );

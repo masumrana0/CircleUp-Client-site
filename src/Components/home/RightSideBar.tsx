@@ -10,6 +10,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 
 const RightSideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
@@ -19,15 +20,59 @@ const RightSideBar = () => {
         >
           <div>
             <div className="flex justify-between  items-center">
-              <h1 className="font_montserrat">Stories</h1>
-              <Button
-                shape="circle"
-                className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+              <h1
+                className={`${theme === "light" ? "text-white" : " color_dark_1"} font_montserrat `}
               >
-                <span>
-                  <BsThreeDotsVertical className="font-bold" />
-                </span>
-              </Button>
+                Stories
+              </h1>
+              <div className="relative">
+                <Button
+                  onClick={() => setIsOpen2(!isOpen2)}
+                  shape="circle"
+                  className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                >
+                  <span>
+                    <BsThreeDotsVertical className="font-bold" />
+                  </span>
+                </Button>
+
+                {/* TODO: make reusable popup card    */}
+                <div className="absolute w-[200px] right-6">
+                  {isOpen2 ? (
+                    <>
+                      <div className="bg-gray-200 rounded-md p-3 z-10 ">
+                        <div className="flex flex-col">
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <FaRegBookmark className="" />
+                              <p className="text-sm">Save Post</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Notification Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
+                              <IoMdNotificationsOutline className="text-xl" />
+                              <p className="text-sm">Turn Off Notification</p>
+                            </div>
+                            <Divider className="my-2" />
+                          </div>
+                          {/* Save Post */}
+                          <div>
+                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
+                              <MdOutlineHideSource className="text-xl" />
+                              <p className="text-sm">Hide Post</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
             <hr className="mt-2" />
             {/* pages 1 */}
@@ -102,7 +147,11 @@ const RightSideBar = () => {
         >
           <div>
             <div className="flex justify-between items-center ">
-              <h1 className="font_montserrat">Suggested Friends</h1>
+              <h1
+                className={`${theme === "light" ? "text-white" : " color_dark_1"}  font_montserrat `}
+              >
+                Suggested Friends
+              </h1>
 
               <div className="relative">
                 <Button

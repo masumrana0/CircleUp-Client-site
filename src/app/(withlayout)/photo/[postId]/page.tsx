@@ -11,9 +11,12 @@ import img from "/public/unnamed.webp";
 import CommentInput from "../../../../Components/shared/CommentInput";
 import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
 import { IComment } from "@/types/newsfeed";
+import { useAppSelector } from "@/Redux/hooks";
 
-const PostDetailPage = ({ params }) => {
-  const id = params.postId;
+const PostDetailPage = ({ params }: { params: any }) => {
+  const theme = useAppSelector((state) => state.themeSlice.theme);
+
+  const id = params?.postId;
   const { data: comments } = useGetAllCommentQuery(id);
   // console.log(id);
 
@@ -22,7 +25,9 @@ const PostDetailPage = ({ params }) => {
       <div className="w-full lg:w-9/12  flex justify-center items-center">
         <Image alt="example" src={img} width={400} height={400} />
       </div>
-      <div className="w-full mt-4 lg:mt-0 lg:w-3/12 bg-gray-200 rounded-md ">
+      <div
+        className={`${theme === "light" ? "bg-[#212835]" : "bg-gray-200"} w-full mt-4 lg:mt-0 lg:w-3/12  rounded-md `}
+      >
         {/* Parent */}
         <div className="">
           <div className="flex justify-between mt-2">

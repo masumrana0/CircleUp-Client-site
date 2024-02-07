@@ -42,7 +42,7 @@ const DarkmodeToggle = ({ handleToggleTheme }: any) => {
     ),
   }));
 
-  const defaultValue = "dark";
+  const defaultValue = "light";
 
   return (
     <Space className="w-full  flex justify-end">

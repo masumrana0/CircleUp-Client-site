@@ -25,8 +25,8 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     toggleThemeMode: (state, action: PayloadAction<string>) => {
-      state.theme = action.payload;
       setThemeStatusLocalStorage(themeKey, action.payload);
+      state.theme = action.payload;
     },
   },
 });

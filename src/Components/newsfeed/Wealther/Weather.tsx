@@ -1,11 +1,10 @@
-
 /**
  * Title: 'realtime weather data dynamic implement by Masum Rana'
  * Description: ''
  * Author: 'Masum Rana'
  * Date: 04-02-2024
  *
-*/
+ */
 
 import React from "react";
 import { FaBookmark, FaLocationDot, FaRegBookmark } from "react-icons/fa6";
@@ -76,7 +75,7 @@ const Weather = async () => {
           </span>
         </div>
         {/* Week */}
-        <div className="grid grid-cols-7 bg-gray-100 gap-2 p-2 rounded-md my-2">
+        {/* <div className="grid grid-cols-7 bg-gray-100 gap-2 p-2 rounded-md my-2">
           <div className="flex flex-col  justify-between items-center ">
             <h1 className=" font-light text-sm">MON</h1>
             <span className=" font-normal text-sm">☀️</span>
@@ -112,7 +111,7 @@ const Weather = async () => {
             <span className=" font-normal text-sm">🌧️</span>
             <h1 className="font_raleway font-light text-sm">69</h1>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-2">
           <h3 className="font-semibold text-md text-gray-700">
             {dayName}, {date}th {todayMonth} {year}

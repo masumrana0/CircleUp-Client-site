@@ -46,11 +46,15 @@ const FeedCard = ({ data }: { data: IPost }) => {
             size="large"
             icon={<UserOutlined />}
           />
-          <div className="flex flex-col">
-            <span className="user_heading cursor-pointer hover:underline">
+          <div className={`flex flex-col`}>
+            <span
+              className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
+            >
               John Smith
             </span>
-            <small className="user_sub_heading font-light">
+            <small
+              className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
+            >
               July 26 2018, 01:03pm
             </small>
           </div>
@@ -107,7 +111,11 @@ const FeedCard = ({ data }: { data: IPost }) => {
       {/* Image and text */}
       <div>
         <div>
-          <p className="font-light text-sm my-2">{data?.postText}</p>
+          <p
+            className={`${theme === "light" ? "text-white" : " text-gray-900"}  font-light text-sm my-2`}
+          >
+            {data?.postText}
+          </p>
         </div>
         <Link href={`/photo/${data._id}`}>
           <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
@@ -119,7 +127,11 @@ const FeedCard = ({ data }: { data: IPost }) => {
       {/* Footer */}
       <div className="flex justify-between gap-2 py-2">
         <div className="flex flex-col w-full mt-2 justify-between">
-          <small className="text-start  mb-2">4 Likes</small>
+          <small
+            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-start  mb-2`}
+          >
+            4 Likes
+          </small>
           <hr />
           <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
@@ -141,7 +153,9 @@ const FeedCard = ({ data }: { data: IPost }) => {
           </div>
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
-          <div className="text-center text-sm  mb-2">
+          <div
+            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-center text-sm  mb-2`}
+          >
             {comments?.length} {comments?.length <= 1 ? "comment" : "comments"}
           </div>
           <hr />
@@ -152,12 +166,16 @@ const FeedCard = ({ data }: { data: IPost }) => {
             >
               {" "}
               <FaRegComment className="text-xl" />
-              <span className="font_raleway">Comment</span>
+              <span className="font-raleway">Comment</span>
             </button>
           </div>
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
-          <small className="text-end  mb-2">0 share</small>
+          <small
+            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-end  mb-2`}
+          >
+            0 share
+          </small>
           <hr />
           <div className="hover:bg-[#f4f4f4] rounded-md w-full flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
             {" "}

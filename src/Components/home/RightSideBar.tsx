@@ -1,17 +1,25 @@
 "use client";
-import { Avatar, Button, Divider, Modal, Upload } from "antd";
-import React, { useState } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { UserOutlined } from "@ant-design/icons";
-import { MdOutlineHideSource, MdOutlinePeopleAlt } from "react-icons/md";
-import { FaGift, FaPlus, FaRegBookmark } from "react-icons/fa6";
 import { useAppSelector } from "@/Redux/hooks";
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Divider } from "antd";
+
+import { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaPlus, FaRegBookmark } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineHideSource, MdOutlinePeopleAlt } from "react-icons/md";
+import StoryModal from "./shared/StoryModal";
 
 const RightSideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const theme = useAppSelector((state) => state.themeSlice.theme);
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
+
+  const showStoryModal = () => {
+    setIsStoryModalOpen(true);
+  };
+
   return (
     <section>
       <div className="flex flex-col gap-4  ">
@@ -79,11 +87,12 @@ const RightSideBar = () => {
             <div className="flex justify-between items-center my-2">
               <div className="flex gap-2 items-center">
                 <div className="w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center border border-dotted cursor-pointer">
-                  <span>
+                  <span onClick={showStoryModal}>
                     <FaPlus />
                   </span>
                 </div>
                 <div className="flex flex-col">
+
                   <span className="text-sm font_montserrat color_dark_1">
                     Add a new Story
                   </span>
@@ -285,6 +294,10 @@ const RightSideBar = () => {
             <Button>Write Message</Button>
           </div>
         </div> */}
+        <StoryModal
+          isOpen={isStoryModalOpen}
+          closeModal={() => setIsStoryModalOpen(false)}
+        />
       </div>
     </section>
   );

@@ -6,51 +6,91 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "@/Components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/Components/ui/select";
 import { Textarea } from "@/Components/ui/textarea";
 import { useSubmitPostMutation } from "@/Redux/api/postApi";
 import { useAppSelector } from "@/Redux/hooks";
-import { IPost } from "@/types/newsfeed";
+import { message } from "antd";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
+const img_hosting_token = "100d68a470e46ca6b971169172b3b2a5"
+
 
 const FeedPostCard = () => {
+
+  const router = useRouter();
+
   const [postText, setPostText] = useState("");
   const [submitPost, options] = useSubmitPostMutation();
   const theme = useAppSelector((state) => state.themeSlice.theme);
 
-  const handlePost = async () => {
-    if (postText.length > 5) {
-      try {
-        const postData: IPost = {
-          postText: postText,
-        };
-        const response = await submitPost(postData);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
-        // Reset the input field
-        setPostText("");
-      } catch (error) {
-        console.error("Error submitting post:", error);
-        // Handle the error as needed
+  const image_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+  const handlePost = async (data: any) => {
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    try {
+      const imageResponse = await axios.post(image_hosting_url, formData);
+
+      if (imageResponse.data.success) {
+        const imageUrl = imageResponse.data.data.display_url;
+
+        await axios.post('https://circleup-backend.vercel.app/api/v1/story/create-story', {
+          about: data.about,
+          image: imageUrl
+        });
+
+        message.success('submitted successfully');
+        router.push('/');
+      } else {
+        message.error('Image upload failed');
       }
+    } catch (error) {
+      console.error('Error:', error);
+      message.error('Something went wrong');
     }
   };
+
+  // const handlePost = async () => {
+  //   if (postText.length > 5) {
+  //     try {
+  //       const postData: IPost = {
+  //         postText: postText,
+  //       };
+  //       const response = await submitPost(postData);
+
+  //       // Reset the input field
+  //       setPostText("");
+  //     } catch (error) {
+  //       console.error("Error submitting post:", error);
+  //       // Handle the error as needed
+  //     }
+  //   }
+  // };
 
   // const handleSubmitPost = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();

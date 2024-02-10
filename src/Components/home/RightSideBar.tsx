@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Button, Divider, Modal, Upload } from "antd";
+import { Avatar, Button, Divider, Dropdown, Modal, Upload } from "antd";
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { UserOutlined } from "@ant-design/icons";
@@ -7,6 +7,8 @@ import { MdOutlineHideSource, MdOutlinePeopleAlt } from "react-icons/md";
 import { FaGift, FaPlus, FaRegBookmark } from "react-icons/fa6";
 import { useAppSelector } from "@/Redux/hooks";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import StoriesCardDrwopDownItem from "./Dropdowns/Items/StoriesItems";
+import SuggestedFriendsItems from "./Dropdowns/Items/SuggestedFriendsItems";
 
 const RightSideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,53 +27,18 @@ const RightSideBar = () => {
               >
                 Stories
               </h1>
-              <div className="relative">
-                <Button
-                  onClick={() => setIsOpen2(!isOpen2)}
-                  shape="circle"
-                  className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-                >
-                  <span>
-                    <BsThreeDotsVertical className="font-bold" />
-                  </span>
-                </Button>
-
-                {/* TODO: make reusable popup card    */}
-                <div className="absolute w-[200px] right-6">
-                  {isOpen2 ? (
-                    <>
-                      <div className="bg-gray-200 rounded-md p-3 z-10 ">
-                        <div className="flex flex-col">
-                          {/* Save Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                              <FaRegBookmark className="" />
-                              <p className="text-sm">Save Post</p>
-                            </div>
-                            <Divider className="my-2" />
-                          </div>
-                          {/* Notification Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                              <IoMdNotificationsOutline className="text-xl" />
-                              <p className="text-sm">Turn Off Notification</p>
-                            </div>
-                            <Divider className="my-2" />
-                          </div>
-                          {/* Save Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
-                              <MdOutlineHideSource className="text-xl" />
-                              <p className="text-sm">Hide Post</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </div>
+              <div>
+                <Dropdown menu={{ items: StoriesCardDrwopDownItem }}>
+                  <Button
+                    onClick={() => setIsOpen2(!isOpen2)}
+                    shape="circle"
+                    className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                  >
+                    <span>
+                      <BsThreeDotsVertical className="font-bold" />
+                    </span>
+                  </Button>
+                </Dropdown>
               </div>
             </div>
             <hr className="mt-2" />
@@ -153,53 +120,17 @@ const RightSideBar = () => {
                 Suggested Friends
               </h1>
 
-              <div className="relative">
-                <Button
-                  onClick={() => setIsOpen(!isOpen)}
-                  shape="circle"
-                  className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-                >
-                  <span>
-                    <BsThreeDotsVertical className="font-bold" />
-                  </span>
-                </Button>
-
-                {/* TODO: make reusable popup card    */}
-                <div className="absolute w-[200px] right-6">
-                  {isOpen ? (
-                    <>
-                      <div className="bg-gray-200 rounded-md p-3 z-10 ">
-                        <div className="flex flex-col">
-                          {/* Save Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                              <FaRegBookmark className="" />
-                              <p className="text-sm">Save Post</p>
-                            </div>
-                            <Divider className="my-2" />
-                          </div>
-                          {/* Notification Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                              <IoMdNotificationsOutline className="text-xl" />
-                              <p className="text-sm">Turn Off Notification</p>
-                            </div>
-                            <Divider className="my-2" />
-                          </div>
-                          {/* Save Post */}
-                          <div>
-                            <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
-                              <MdOutlineHideSource className="text-xl" />
-                              <p className="text-sm">Hide Post</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </div>
+              <div>
+                <Dropdown menu={{ items: SuggestedFriendsItems }}>
+                  <Button
+                    shape="circle"
+                    className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+                  >
+                    <span>
+                      <BsThreeDotsVertical className="font-bold" />
+                    </span>
+                  </Button>
+                </Dropdown>
               </div>
             </div>
             <hr className="mt-2" />

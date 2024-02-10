@@ -1,39 +1,58 @@
 "use client";
+
+// essesential Imports
+
+import { Avatar, Button, Dropdown } from "antd";
+// icons
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Divider } from "antd";
-import Link from "next/link";
-import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
+import { TbShare3 } from "react-icons/tb";
 
-import { IPost } from "@/types/newsfeed";
-import { Dropdown } from "antd";
+// framework essetional
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
+// Components
+import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
+import FullName from "@/service/name.service";
 import PostCommentBox from "../shared/PostCommentBox";
+
+// types
+import { IName } from "@/types/auth";
+import { IPost } from "@/types/newsfeed";
+
+// side data
 import img from "/public/unnamed.webp";
 
-import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
+// redux essential imports
 import { setPostId } from "@/Redux/Slices/unitlitySlice";
 import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { FaRegBookmark } from "react-icons/fa6";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineHideSource } from "react-icons/md";
-import { TbShare3 } from "react-icons/tb";
+import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
+  // redux
+  const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.themeSlice.theme);
-
-  const { reaction } = useAppSelector((state) => state.reaction);
-  // console.log(reaction);
-
+  const reaction = useAppSelector((state) => state.reaction.reaction);
   const { data: comments } = useGetAllCommentQuery(data._id);
 
-  const dispatch = useAppDispatch();
-  dispatch(setPostId(data?._id as string));
-  const [showComments, setShowComments] = useState(false);
+  // handle added post id  for submiting post related work
+  const handleAddedPostId = () => {
+    dispatch(setPostId(data?._id as string));
+  };
+
+  // extract data for use
+  const fullName = FullName(data?.user?.name as IName);
+  const userProfilePicture =
+    typeof data?.user === "object" && "profilePicture" in data.user
+      ? data.user.profilePicture
+      : "";
 
   return (
     <section
@@ -42,6 +61,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
           <Avatar
+            src={userProfilePicture}
             className=" cursor-pointer "
             size="large"
             icon={<UserOutlined />}
@@ -50,64 +70,36 @@ const FeedCard = ({ data }: { data: IPost }) => {
             <span
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
             >
-              John Smith
+              {fullName}
             </span>
             <small
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline  user_sub_heading font-light`}
             >
               July 26 2018, 01:03pm
+              {/* {data?.createdAt} */}
             </small>
           </div>
         </div>
-        <div className="relative">
-          <Button
-            onClick={() => setIsOpen(!isOpen)}
-            shape="circle"
-            className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
-          >
-            <span>
-              <BsThreeDots className="font-bold" />
-            </span>
-          </Button>
 
-          {/* TODO: make reusable popup card    */}
-          <div className="absolute w-[200px] right-6">
-            {isOpen ? (
-              <>
-                <div className="bg-gray-200 rounded-md p-3">
-                  <div className="flex flex-col">
-                    {/* Save Post */}
-                    <div>
-                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                        <FaRegBookmark className="" />
-                        <p className="text-sm">Save Post</p>
-                      </div>
-                      <Divider className="my-2" />
-                    </div>
-                    {/* Notification Post */}
-                    <div>
-                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer items-center gap-2">
-                        <IoMdNotificationsOutline className="text-xl" />
-                        <p className="text-sm">Turn Off Notification</p>
-                      </div>
-                      <Divider className="my-2" />
-                    </div>
-                    {/* Save Post */}
-                    <div>
-                      <div className="flex hover:bg-slate-100 p-2 rounded-md cursor-pointer  items-center gap-2">
-                        <MdOutlineHideSource className="text-xl" />
-                        <p className="text-sm">Hide Post</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
+        {/* three dots  */}
+        <div>
+          <Dropdown
+            menu={{ items: PostCardDrwopDownItem }}
+            placement="bottomRight"
+            arrow
+          >
+            <Button
+              shape="circle"
+              className="flex justify-center items-center rounded-full bg-[#f4f4f4]"
+            >
+              <span>
+                <BsThreeDots className="font-bold" />
+              </span>
+            </Button>
+          </Dropdown>
         </div>
       </div>
+
       {/* Image and text */}
       <div>
         <div>
@@ -133,7 +125,10 @@ const FeedCard = ({ data }: { data: IPost }) => {
             4 Likes
           </small>
           <hr />
-          <div className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 ">
+          <div
+            className="hover:bg-[#f4f4f4] rounded-md  flex justify-center items-center my-2 gap-2 cursor-pointer p-1 "
+            onMouseEnter={handleAddedPostId}
+          >
             <Dropdown menu={{ items: reactionItem }} placement="top" arrow>
               <div className="flex gap-2">
                 <Image
@@ -184,14 +179,18 @@ const FeedCard = ({ data }: { data: IPost }) => {
           </div>
         </div>
       </div>
-      {showComments && (
-        <div>
-          <PostCommentBox
-            setShowComments={setShowComments}
-            postId={data?._id}
-          />
-        </div>
-      )}
+
+      {/* comment section */}
+      <div>
+        {showComments && (
+          <div>
+            <PostCommentBox
+              setShowComments={setShowComments}
+              postId={data?._id}
+            />
+          </div>
+        )}
+      </div>
     </section>
   );
 };

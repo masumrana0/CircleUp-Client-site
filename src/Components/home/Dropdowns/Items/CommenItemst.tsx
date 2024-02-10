@@ -1,5 +1,5 @@
 import type { MenuProps } from "antd";
-import CommentLabel from "./CommentLabel";
+import CommentLabel from "../Labels/CommentLabel";
 import React from "react";
 
 export const commentItems: MenuProps["items"] = [

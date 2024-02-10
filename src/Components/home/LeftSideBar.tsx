@@ -1,16 +1,13 @@
 "use client";
-import { Avatar, Button, Divider } from "antd";
+import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
-import { FaBookmark, FaLocationDot, FaRegBookmark } from "react-icons/fa6";
-import { MdOutlineHideSource, MdOutlineRemoveRedEye } from "react-icons/md";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import React from "react";
+
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import Weather from "../newsfeed/Wealther/Weather";
 import { useAppSelector } from "@/Redux/hooks";
-import { IoMdNotificationsOutline } from "react-icons/io";
 
 const LeftSideBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   return (
     <section>
@@ -54,48 +51,7 @@ const LeftSideBar = () => {
                 <MdOutlineRemoveRedEye />
               </span>
             </div>
-            <hr className="" />
-            <div className="flex justify-between items-center my-2">
-              <div className="flex gap-2 items-center">
-                <Avatar size="large" icon={<UserOutlined />} />
-                <div className="flex flex-col">
-                  <span
-                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
-                  >
-                    Css Ninja
-                  </span>
-                  <small
-                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
-                  >
-                    3 hours ago
-                  </small>
-                </div>
-              </div>
-              <span className="cursor-pointer">
-                <MdOutlineRemoveRedEye />
-              </span>
-            </div>
-            <hr className="" />
-            <div className="flex justify-between items-center my-2">
-              <div className="flex gap-2 items-center">
-                <Avatar size="large" icon={<UserOutlined />} />
-                <div className="flex flex-col">
-                  <span
-                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
-                  >
-                    Css Ninja
-                  </span>
-                  <small
-                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
-                  >
-                    3 hours ago
-                  </small>
-                </div>
-              </div>
-              <span className="cursor-pointer">
-                <MdOutlineRemoveRedEye />
-              </span>
-            </div>
+            <hr />
           </div>
         </div>
       </div>
@@ -104,5 +60,3 @@ const LeftSideBar = () => {
 };
 
 export default LeftSideBar;
-
-// meeting tomorrow 6:15 pm

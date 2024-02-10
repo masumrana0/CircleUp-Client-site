@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import FeedCard from "./shared/FeedCard";
 import FeedPostCard from "./shared/FeedPostCard";
@@ -19,7 +20,7 @@ const MainFeed = () => {
             <Loading />
           ) : (
             allPost?.map((post: IPost) => (
-              <FeedCard key={post?.user} data={post} />
+              <FeedCard key={post?._id} data={post} />
             ))
           )}
         </div>

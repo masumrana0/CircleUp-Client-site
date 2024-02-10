@@ -1,7 +1,7 @@
 import { IName, IUser } from "./auth";
 
 export type IUserSpecificField = {
-  userId?: string;
+  userId: string;
   name: {
     firstName: string;
     lastName?: string;
@@ -14,6 +14,7 @@ export interface IPost {
   user?: IUser | IUserSpecificField;
   postText: string;
   Images?: string[];
+  createdAt?: string;
 }
 
 export interface IComment {
@@ -25,7 +26,7 @@ export interface IComment {
 
 export interface IReaction {
   _id?: string;
-  user?: string | IUserSpecificField;
+  user?: IUserSpecificField | IUser;
   post?: string;
   reaction: "like" | "love" | "haha" | "sad" | "wow" | "angry";
 }

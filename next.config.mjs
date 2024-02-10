@@ -3,9 +3,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+
   images: {
     domains: ["www.gravatar.com"], // Add the domain here
   },
+  reactStrictMode: false,
   async headers() {
     return [
       {

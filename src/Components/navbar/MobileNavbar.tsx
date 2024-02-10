@@ -1,8 +1,9 @@
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 
 import LeftSideNavBar from "./components/LeftSideNavBar";
-import MobileNavRight from "./components/MobileNavRight";
+// import MobileNavRight from "./components/MobileNavRight";
 import Link from "next/link";
 import { Divider } from "antd";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -10,8 +11,8 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { IoMdHelpBuoy } from "react-icons/io";
 import { IoSettings } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import { AiOutlineClose } from "react-icons/ai";
 import DarkmodeToggle from "./components/DarkmodeToggle";
-
 const logo: string = "/logo.jpg";
 
 const MobileNavbar = () => {
@@ -38,10 +39,18 @@ const MobileNavbar = () => {
         </div> */}
         </div>
         <div>
-          <GiHamburgerMenu
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-xl cursor-pointer z-50 "
-          />
+          {isOpen ? (
+            <AiOutlineClose
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-xl cursor-pointer z-50 "
+            />
+          ) : (
+            <GiHamburgerMenu
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-xl cursor-pointer z-50 "
+            />
+          )}
+
           <div className=" ">
             {isOpen ? (
               <>

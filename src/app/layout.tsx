@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "../lib/Providers";
-import { useAppSelector } from "@/Redux/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 

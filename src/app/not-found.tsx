@@ -6,7 +6,7 @@ const NotFound = () => {
       <h2 className="text-gray-300 text-xl">
         Sorry we cannot serve you here!!!
       </h2>
-      <Link href="/" className="underline text-violet-500">
+      <Link href="/home" className="underline text-violet-500">
         Go Back
       </Link>
     </div>

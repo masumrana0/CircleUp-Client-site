@@ -10,9 +10,10 @@ import { profileMenuItems } from "@/constants/profileMenu";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const ProfilePage = () => {
+const ProfilePage = ({ params }: { params: any }) => {
+  const id = params?.userName;
   const [activeTab, setActiveTab] = useState<any>(profileMenuItems[0].key);
-  // console.log(activeTab);
+
   const handleMenuClick = (itemId: any) => {
     setActiveTab(itemId);
   };

@@ -1,31 +1,25 @@
 "use client";
-import { Avatar, Button, Dropdown } from "antd";
+import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
+import { setPostId } from "@/Redux/Slices/unitlitySlice";
+import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
+import { useGetAllReactionQuery } from "@/Redux/api/reactionApi";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import FullName from "@/service/name.service";
+import { IName } from "@/types/auth";
+import { IPost, IReaction } from "@/types/newsfeed";
+import { getUserReaction } from "@/utils/getUserSpecificReaction";
 import { UserOutlined } from "@ant-design/icons";
-import { BsThreeDots } from "react-icons/bs";
-import { FaRegComment } from "react-icons/fa";
-import { TbShare3 } from "react-icons/tb";
+import { Avatar, Button, Dropdown } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { reactionItem } from "@/Components/newsfeed/reaction/ReactionItem";
-import FullName from "@/service/name.service";
-import PostCommentBox from "../shared/PostCommentBox";
-import { IName } from "@/types/auth";
-import { IPost, IReaction } from "@/types/newsfeed";
-import img from "/public/unnamed.webp";
-import { setPostId } from "@/Redux/Slices/unitlitySlice";
-import { useGetAllCommentQuery } from "@/Redux/api/commentApi";
-import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { BsThreeDots } from "react-icons/bs";
+import { FaRegComment } from "react-icons/fa";
+import { TbShare3 } from "react-icons/tb";
 import PostCardDrwopDownItem from "../Dropdowns/Items/PostCardItems";
-import { useGetAllReactionQuery } from "@/Redux/api/reactionApi";
-import { getUserInfo } from "@/service/auth.service";
-import { getUserReaction } from "@/utils/getUserSpecificReaction";
-// reaction
+import PostCommentBox from "../shared/PostCommentBox";
+import img from "/public/unnamed.webp";
 import likeOutline from "/public/assets/reaction/likeOutline.png";
-import like from "/public/assets/reaction/like.png";
-import love from "/public/assets/reaction/love.png";
-import haha from "/public/assets/reaction/haha.png";
-import sad from "/public/assets/reaction/sad.png";
 
 const FeedCard = ({ data }: { data: IPost }) => {
   const [showComments, setShowComments] = useState(false);
@@ -50,6 +44,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
   }
 
   // extract data for use
+
   const fullName = FullName(data?.user?.name as IName);
   const userProfilePicture =
     typeof data?.user === "object" && "profilePicture" in data.user
@@ -62,24 +57,24 @@ const FeedCard = ({ data }: { data: IPost }) => {
 
   // console.log(reactionImg);
 
+  // start: Added by samsul 10/02/2024
   // Date format
   const formatDate = (createdAt: any) => {
     const date = new Date(createdAt);
     const monthAbbreviation = date.toLocaleString("default", {
       month: "short",
-    }); // Get abbreviated month
+    });
     const day = date.getDate();
     const year = date.getFullYear();
     let hour = date.getHours();
     const minute = date.getMinutes();
     const ampm = hour >= 12 ? "PM" : "AM";
 
-    // Convert hour from 24-hour format to 12-hour format
     hour = hour % 12;
-    hour = hour ? hour : 12; // 0 should be converted to 12
-
+    hour = hour ? hour : 12;
     return `${monthAbbreviation} ${day}, ${year}, ${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
   };
+  // end: Added by samsul 10/02/2024
 
   return (
     <section
@@ -87,7 +82,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
     >
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
-          <Link href="/profile">
+          <Link href={`/profile/${fullName}`}>
             <Avatar
               src={userProfilePicture}
               className=" cursor-pointer "
@@ -97,7 +92,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
           </Link>
           <div className={`flex flex-col`}>
             <Link
-              href="/profile"
+              href={`/profile/${data?.user?.userId}`}
               className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
             >
               {fullName}
@@ -138,7 +133,7 @@ const FeedCard = ({ data }: { data: IPost }) => {
             {data?.postText}
           </p>
         </div>
-        <Link href={`/photo/${data._id}`}>
+        <Link href={`/profile/${data?.user?.userId}`}>
           <div className="w-full h-[300px] overflow-hidden rounded-md bg-[#f4f4f4] flex justify-center items-center ">
             <Image src={img} width={300} height={300} alt="user post img" />
           </div>

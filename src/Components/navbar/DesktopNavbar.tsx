@@ -16,7 +16,8 @@ import Link from "next/link";
 import { useAppSelector } from "@/Redux/hooks";
 
 const DesktopNavbar = () => {
-  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const theme = useAppSelector((state) => state.themeSlice.theme);
+  const theme = "light";
   return (
     <header
       className={`${theme === "light" ? "bg-gray-900" : "bg-white"} fixed top-0 left-0 right-0 z-50 flex justify-between gap-5 shadow-lg px-10 items-center py-3 `}

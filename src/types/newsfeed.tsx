@@ -13,7 +13,7 @@ export interface IPost {
   _id?: string;
   user?: IUser | IUserSpecificField;
   postText: string;
-  Images?: string[];
+  Images?: object[];
   createdAt?: string;
 }
 

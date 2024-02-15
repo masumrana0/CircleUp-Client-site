@@ -23,7 +23,8 @@ const RightSideNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   // redux
   const dispatch = useAppDispatch();
-  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const theme = useAppSelector((state) => state.themeSlice.theme);
+  const theme = "light";
 
   const handleToggleTheme = () => {
     dispatch(toggleThemeMode(theme === "light" ? "dark" : "light"));
@@ -36,8 +37,8 @@ const RightSideNavbar = () => {
       <div className="hidden md:block">
         <Dropdown menu={{ items: ProfileDrwopDownItem }}>
           <button
-            // onMouseEnter={() => setIsOpen(true)}
-            // onMouseOver={() => setIsOpen(false)}
+          // onMouseEnter={() => setIsOpen(true)}
+          // onMouseOver={() => setIsOpen(false)}
           >
             <Space wrap size={16}>
               <Avatar size={45} icon={<UserOutlined />} />

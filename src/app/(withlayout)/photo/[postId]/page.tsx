@@ -14,7 +14,8 @@ import { IComment } from "@/types/newsfeed";
 import { useAppSelector } from "@/Redux/hooks";
 
 const PostDetailPage = ({ params }: { params: any }) => {
-  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const theme = useAppSelector((state) => state.themeSlice.theme);
+  const theme = "light";
 
   const id = params?.postId;
   const { data: comments } = useGetAllCommentQuery(id);
@@ -26,7 +27,7 @@ const PostDetailPage = ({ params }: { params: any }) => {
         <Image alt="example" src={img} width={400} height={400} />
       </div>
       <div
-        className={`${theme === "light" ? "bg-[#212835]" : "bg-gray-200"} w-full mt-4 lg:mt-0 lg:w-3/12  rounded-md `}
+        className={`${theme === "light" ? "bg-gray-200" : "bg-[#212835]"} w-full mt-4 lg:mt-0 lg:w-3/12  rounded-md `}
       >
         {/* Parent */}
         <div className="">

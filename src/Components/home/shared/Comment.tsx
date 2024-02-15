@@ -33,9 +33,9 @@ const Comment = ({ comment }: { comment: IComment }) => {
         <div>
           <CommentCard comment={comment} />
           <div className="flex  items-center gap-5  ">
-            <button className="text-[12px]   cursor-pointer hover:underline color_dark_2">
+            {/* <button className="text-[12px]   cursor-pointer hover:underline color_dark_2">
               Like
-            </button>
+            </button> */}
             <button
               onClick={() => setReplyOpen(!isReplyOpen)}
               className="text-[12px]   hover:underline color_dark_2"

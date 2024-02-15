@@ -43,7 +43,8 @@ const FeedCard = ({ data }: { data?: IPost }) => {
 
   // redux
   const dispatch = useAppDispatch();
-  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const theme = useAppSelector((state) => state.themeSlice.theme);
+  const theme = "light";
   // const reaction = useAppSelector((state) => state.reaction.reaction);
   // console.log(reaction)
   const { data: comments } = useGetAllCommentQuery(data?._id);
@@ -102,7 +103,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
 
   return (
     <section
-      className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+      className={`${theme === "light" ? "bg-gray-200" : "bg-[#212835]"} p-4 rounded-md`}
     >
       <div className="flex justify-between mt-2 ">
         <div className="flex gap-2 ">
@@ -117,12 +118,12 @@ const FeedCard = ({ data }: { data?: IPost }) => {
           <div className={`flex flex-col`}>
             <Link
               href={`/profile/${data?.user?.userId}`}
-              className={`${theme === "light" ? "text-white" : " text-gray-900"} user_heading cursor-pointer hover:underline`}
+              className={`${theme === "light" ? "text-black" : " text-white"} user_heading cursor-pointer hover:underline`}
             >
               {fullName}
             </Link>
             <small
-              className={`${theme === "light" ? "text-white" : " text-gray-900"}  user_sub_heading font-light`}
+              className={`${theme === "light" ? "text-black" : "text-white"}  user_sub_heading font-light`}
             >
               {formatDate(data?.createdAt)}
             </small>
@@ -152,7 +153,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
       <div>
         <div>
           <p
-            className={`${theme === "light" ? "text-white" : " text-gray-900"}   my-2`}
+            className={`${theme === "light" ? "text-black" : " text-white"}   my-2`}
           >
             {data?.postText}
           </p>
@@ -171,12 +172,12 @@ const FeedCard = ({ data }: { data?: IPost }) => {
           <Dialog>
             <DialogTrigger className="flex">
               <small
-                className={`${theme === "light" ? "text-white" : " text-gray-900"} text-start  mb-2 hover:underline`}
+                className={`${theme === "light" ? "text-black" : " text-white-900"} text-start  mb-2 hover:underline`}
               >
                 4 Likes
               </small>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]  bg-white">
+            <DialogContent className="sm:max-w-[425px]   ">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold">
                   Reactions
@@ -211,7 +212,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
           <div
-            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-center text-sm  mb-2`}
+            className={`${theme === "light" ? "text-black" : " text-white"} text-center text-sm  mb-2`}
           >
             {comments?.length} {comments?.length <= 1 ? "comment" : "comments"}
           </div>
@@ -229,7 +230,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
         </div>
         <div className="flex flex-col w-full mt-2 justify-between">
           <small
-            className={`${theme === "light" ? "text-white" : " text-gray-900"} text-end  mb-2`}
+            className={`${theme === "light" ? "text-black" : " text-white"} text-end  mb-2`}
           >
             0 share
           </small>

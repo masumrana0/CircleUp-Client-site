@@ -8,7 +8,8 @@ import Weather from "../newsfeed/Wealther/Weather";
 import { useAppSelector } from "@/Redux/hooks";
 
 const LeftSideBar = () => {
-  const theme = useAppSelector((state) => state.themeSlice.theme);
+  // const theme = useAppSelector((state) => state.themeSlice.theme);
+  const theme = "light";
   return (
     <section>
       <div className="flex flex-col   gap-4 ">
@@ -19,12 +20,12 @@ const LeftSideBar = () => {
 
         {/* Latest activity */}
         <div
-          className={`${theme === "light" ? "bg-[#212835]" : "bg-white"} p-4 rounded-md`}
+          className={`${theme === "light" ? "bg-gray-200" : "bg-[#212835]"} p-4 rounded-md`}
         >
           <div>
             <div className="flex justify-between items-center ">
               <h1
-                className={`${theme === "light" ? "text-white" : " text-gray-900"} font_montserrat`}
+                className={`${theme === "light" ? "text-black" : " text-gray-900"} font_montserrat`}
               >
                 Latest Activity
               </h1>
@@ -36,12 +37,12 @@ const LeftSideBar = () => {
                 <Avatar size="large" icon={<UserOutlined />} />
                 <div className="flex flex-col">
                   <span
-                    className={`${theme === "light" ? "text-white" : " color_dark_1"} text-sm font_montserrat `}
+                    className={`${theme === "light" ? "text-black" : " color_dark_1"} text-sm font_montserrat `}
                   >
                     Css Ninja
                   </span>
                   <small
-                    className={`${theme === "light" ? "text-white" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
+                    className={`${theme === "light" ? "text-black" : " text-gray-900"} font-light color_dark_2 user_sub_heading`}
                   >
                     3 hours ago
                   </small>

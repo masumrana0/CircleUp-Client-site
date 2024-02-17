@@ -205,7 +205,7 @@ const FeedCard = ({ data }: { data?: IPost }) => {
                   alt="like icon"
                   className=" transion-all duration-300"
                 />
-                <h2>{"like"} </h2>
+                <h2>{reaction?.reaction} </h2>
               </div>
             </Dropdown>
           </div>

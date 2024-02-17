@@ -30,6 +30,7 @@ import Image from "next/image";
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
+import path from "path";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("Hello i am masum Rana");
@@ -37,9 +38,7 @@ const FeedPostCard = () => {
   // const [images, setImages] = useState(null);
   const [imgs, setImg] = useState([]);
   const [imgsPath, setImgsPath] = useState([]);
-  const [imgUrls, setImgUrl] = useState([
-    "https://i.ibb.co/WtQtc58/20201031-172851.jpg",
-  ]);
+  const [imgUrls, setImgUrl] = useState([]);
   const [submitPost, options] = useSubmitPostMutation();
   // const theme = useAppSelector((state) => state.themeSlice.theme);
   const theme = "light";
@@ -63,15 +62,14 @@ const FeedPostCard = () => {
   // handle submit image
   const handleSubmitImage = async (e: FormEvent<HTMLFormElement>) => {
     const image = e.target.files && e.target.files[0];
+    // console.log(e);
 
-    console.log(e);
-
-    setImgsPath([...imgsPath, image.name]);
+    setImgsPath([...imgsPath, image]);
 
     if (image) {
       const file = await imgebase64(image);
       setImg([...imgs, file]);
-      console.log(file);
+      // console.log(file);
     }
   };
 
@@ -81,34 +79,47 @@ const FeedPostCard = () => {
     setImg(updatedImgs);
   };
 
-  const data = new FormData();
-
   const handlePost = async () => {
-    const postData: IPost = {
-      postText: postText,
-      Images: imgsPath,
-    };
-    console.log(postData);
-
-    // const response = await submitPost(postData);
-
-    // console.log(imgsPath);
-    // data.append("image", imgsPath);
     const api_key = "e76b695c8c9d3f4bfa293469ec3905ed";
     const image_hosting_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
 
-    // const uploadPromises = imgs?.map((path: string) => {
-    //   data.append("image", path);
-    //   fetch(image_hosting_url, {
-    //     method: "POST",
-    //     body: data,
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data: any) => {
-    //       console.log(data.data.display_url, "99");
-    //       // setImgUrl([...imgUrls, data?.data?.display_url]);
-    //     });
-    // });
+    // const uploadPromises = imgsPath?.map(async (path: string) => {
+
+    //   console.log(dataFatch);
+    // })
+    // for (let index = 0; index < array.length; index++) {
+    //   const element = array[index];
+
+    // }
+
+    const data = new FormData();
+    const images: string[] = [];
+    for (let i = 0; i < imgsPath.length; i++) {
+      const path = imgsPath[i];
+      data.append("image", path);
+      const dataFatch = await fetch(image_hosting_url, {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data: any) => {
+          const url = data?.data?.display_url;
+          // console.log(data);
+
+          images.push(url);
+          console.log("Finished");
+        });
+    }
+
+    const postData: IPost = {
+      postText: postText,
+      images: images,
+    };
+
+    const res = await submitPost(postData as IPost);
+    console.log(res);
   };
 
   return (

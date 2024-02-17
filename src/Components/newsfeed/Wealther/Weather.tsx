@@ -30,7 +30,7 @@ const Weather = async () => {
       .then((res) => res.json())
       .then((data: any) => {
         setData(data);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 

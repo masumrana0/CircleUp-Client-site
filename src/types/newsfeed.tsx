@@ -13,7 +13,7 @@ export interface IPost {
   _id?: string;
   user?: IUser | IUserSpecificField;
   postText: string;
-  Images?: object[];
+  images?: string[];
   createdAt?: string;
 }
 
@@ -36,3 +36,8 @@ export interface IReaction {
   post?: string;
   reaction: "like" | "love" | "haha" | "sad" | "wow" | "angry";
 }
+
+export type IStory = {
+  user?: IUserSpecificField | IUser;
+  story: string;
+};

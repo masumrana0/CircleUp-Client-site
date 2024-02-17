@@ -27,7 +27,7 @@ const CommentReply = ({ comment_id }: { comment_id: string }) => {
     }
   };
   return (
-    <div className="w-full mt-4 bg-gray-200 rounded-md  transition-all duration-300 ">
+    <div className="w-full mt-4 bg-gray-300 rounded-md  transition-all duration-300 ">
       <form
         onClick={() => setCollapse(true)}
         onSubmit={handlePostReplyComment}
@@ -36,7 +36,7 @@ const CommentReply = ({ comment_id }: { comment_id: string }) => {
         <input
           required
           name="commentbox"
-          className="outline-none w-full p-2 text-sm bg-gray-200 rounded-md "
+          className="outline-none w-full p-2 text-sm bg-gray-300 rounded-md "
           placeholder="Write your reply..."
         />
 

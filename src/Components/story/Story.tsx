@@ -1,34 +1,55 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown } from "antd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import StoriesCardDrwopDownItem from "../home/Dropdowns/Items/StoriesItems";
 import { FaPlus } from "react-icons/fa6";
+import { useCreateStoryMutation } from "@/Redux/api/storyApi";
+import { IStory } from "@/types/newsfeed";
 
-const Story = () => {
+const Story = async () => {
   const [story, setStory] = useState();
-  const data = new FormData();
+  const [hostingLoading, setHostingLoading] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
+  const formData = new FormData();
 
   const theme = "light";
   const api_key = "e76b695c8c9d3f4bfa293469ec3905ed";
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
 
+  // redux
+  const [createStory] = useCreateStoryMutation();
   const handleSubmitStory = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log('hello klsdjfkljsd');
-
+    setHostingLoading(true);
     const image = e.target.files && e.target.files[0];
-    data.append("image", image);
+    formData.append("image", image);
     fetch(image_hosting_url, {
       method: "POST",
-      body: data,
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data: any) => {
-        // console.log(data.data.display_url, "99");
-        // setImgUrl([...imgUrls, data?.data?.display_url]);
+      .then(async (data: any) => {
+        const url = data?.data?.display_url;
+        const res = await createStory({ story: url });
+        console.log(res);
       });
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   };
+  // console.log(imgUrl.length);
+  useEffect(() => {
+    async function fetchData() {
+      const storyData = {
+        story: imgUrl,
+      };
+      const res = await createStory(storyData as IStory);
+      // console.log(res);
+    }
+
+    fetchData();
+  }, [createStory, imgUrl]);
 
   return (
     <div
@@ -60,12 +81,11 @@ const Story = () => {
         <div className="flex justify-between items-center my-2">
           <div className="flex gap-2 items-center">
             <div className="w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center border border-dotted cursor-pointer">
-              <label htmlFor="uploadImage">
+              <label htmlFor="uploadStoryImage">
                 <input
-                  multiple
-                  name="uploadImage"
+                  name="uploadStoryImage"
                   type="file"
-                  id="uploadImage"
+                  id="uploadStoryImage"
                   className="hidden"
                   onChange={(e) => handleSubmitStory(e)}
                 />

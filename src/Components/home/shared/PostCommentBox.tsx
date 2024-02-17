@@ -54,19 +54,19 @@ const PostCommentBox = ({ setShowComments, postId }: any) => {
         ))}
       </div>
       <div className="mt-5">
-        <div className="flex gap-2 ">
+        <div className="flex gap-2 bg-gray-300 rounded-lg ">
           <Avatar
             className="border-2"
             size="large"
-            src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+            // src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
             icon={<UserOutlined />}
           />
-          <div className="w-full mt-4 bg-gray-200 rounded-md ">
+          <div className="w-full mt-4    rounded-md ">
             <form onSubmit={handlePostComment}>
               <input
                 required
                 name="commentbox"
-                className="outline-none w-full p-2 text-sm bg-gray-200 rounded-md "
+                className="outline-none w-full p-2 text-sm bg-gray-300  rounded-md "
                 placeholder="Write your comment..."
               />
 

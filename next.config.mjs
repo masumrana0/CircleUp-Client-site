@@ -5,7 +5,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["www.gravatar.com"], // Add the domain here
+    domains: ["www.gravatar.com", "i.ibb.co"], // Add the domain here
   },
   reactStrictMode: false,
   async headers() {

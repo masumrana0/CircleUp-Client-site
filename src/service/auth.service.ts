@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { authKey } from "@/constants/storageKey";
-import { instance } from "@/helpers/axios/axiosInstance";
+import { instance as axiosInstance } from "@/helpers/axios/axiosInstance";
 import { getBaseUrl } from "@/helpers/config/envConfig";
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 import { IDecodedToken } from "@/types/auth";
@@ -34,7 +34,7 @@ export const removeUserInfo = (key: string) => {
 };
 
 export const getNewAccessToken = async () => {
-  return await instance({
+  return await axiosInstance({
     url: `${getBaseUrl()}/auth/refresh-token`,
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,55 +1,97 @@
+"use client";
 import React, { useEffect, useState } from "react";
-import { BsMoonStars, BsBrightnessHigh } from "react-icons/bs";
+import { BsFillMoonFill, BsSun, BsPcDisplayHorizontal } from "react-icons/bs";
 import { FaDesktop, FaMoon } from "react-icons/fa6";
-// import { toggleThemeMode } from "@/Redux/Slices/themeSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { Select, Space } from "antd";
 
-const shouldRenderOnServer = typeof window === "undefined";
+// const shouldRenderOnServer = typeof window === "undefined";
 
-const DarkmodeToggle = ({ handleToggleTheme }: any) => {
-  // Local State
-  const [localThemeState, setLocalThemeState] = useState(false);
-  // Redux
-  const dispatch = useAppDispatch();
-  // const themeState = useAppSelector((state) => state.themeSlice.theme);
-
-  useEffect(() => {
-    if (shouldRenderOnServer) {
-      return;
-    }
-    // setLocalThemeState(themeState);
-  }, []);
+const DarkmodeToggle = () => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
+  );
+  const darkQuery = window.matchMedia("(prefers-color-scheme:dark)");
+  const element = document.documentElement;
+  // useEffect(() => {
+  //   if (shouldRenderOnServer) {
+  //     return;
+  //   }
+  //   // setLocalThemeState(themeState);
+  // }, []);
 
   const options = [
     {
-      icon: <BsBrightnessHigh />,
+      icon: BsSun,
       text: "light",
     },
     {
-      icon: <FaMoon />,
+      icon: BsFillMoonFill,
       text: "dark",
     },
+    {
+      icon: FaDesktop,
+      text: "system",
+    },
   ];
+
+  const onWindowMatch = () => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) && darkQuery.matches)
+    ) {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark");
+    }
+  };
+
+  useEffect(() => {
+    switch (theme) {
+      case "dark":
+        element.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        break;
+      case "light":
+        element.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        break;
+      default:
+        localStorage.removeItem("theme");
+        onWindowMatch();
+        break;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme]);
+
+  darkQuery.addEventListener("change", (e) => {
+    if (!("theme" in localStorage)) {
+      if (e.matches) {
+        element.classList.add("dark");
+      } else {
+        element.classList.remove("dark");
+      }
+    }
+  });
 
   const SelectOption = options.map((option) => ({
     value: option.text,
     label: (
-      <span className="w-full flex justify-center items-center gap-1">
-        {option.icon}
+      <button className="w-full flex justify-between   items-center gap-1  ">
         {option.text}
-      </span>
+        <option.icon className="text-md" />
+      </button>
     ),
   }));
 
-  const defaultValue = "light";
+  const defaultValue = "system";
 
   return (
     <Space className="w-full  flex justify-end">
       <Select
         defaultValue={defaultValue}
         style={{ width: "100% !important" }}
-        onChange={(value) => handleToggleTheme(value)}
+        onChange={(value) => setTheme(value)}
         options={SelectOption}
       />
     </Space>

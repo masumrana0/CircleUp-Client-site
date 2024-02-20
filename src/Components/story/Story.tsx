@@ -27,7 +27,7 @@ const Story = async () => {
   const theme = "light";
   const api_key = "e76b695c8c9d3f4bfa293469ec3905ed";
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${api_key}`;
-
+  
   // redux
   const [createStory] = useCreateStoryMutation();
   const { data } = useGetAllStoryQuery(null);

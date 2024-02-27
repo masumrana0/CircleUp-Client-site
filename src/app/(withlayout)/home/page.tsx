@@ -23,7 +23,6 @@ const AfterLoginHomePage = () => {
             <div className="flex mb-2 gap-3 px-2 overflow-x-auto ">
               <MobileStory name="Story" me={true} />
               <MobileStory name="Samad.." />
-              <MobileStory name="Kobir" />
               <MobileStory name="Nuha.." />
               <MobileStory name="Evana" />
               <MobileStory name="John" />

@@ -30,7 +30,7 @@ import Image from "next/image";
 import React, { FormEvent, useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { MdPermMedia } from "react-icons/md";
-import path from "path";
+// import path from "path";
 
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("Hello i am masum Rana");

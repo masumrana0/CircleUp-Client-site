@@ -5,6 +5,7 @@ import FeedPostCard from "./shared/FeedPostCard";
 import { useGetAllPostQuery } from "@/Redux/api/postApi";
 import { IPost } from "@/types/newsfeed";
 import Loading from "@/app/loading";
+import PostInputField from "../PostSection/PostInputField";
 
 const MainFeed = () => {
   const { data: allPost, isLoading } = useGetAllPostQuery(null);
@@ -13,7 +14,8 @@ const MainFeed = () => {
     <section className="">
       <div className="  min-h-[90vh] overflow-auto  ">
         <div className=" rounded-md">
-          <FeedPostCard />
+          {/* <FeedPostCard /> */}
+          <PostInputField />
         </div>
         <div className="flex flex-col mt-4  gap-4">
           {isLoading ? (

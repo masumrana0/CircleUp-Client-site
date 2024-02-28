@@ -116,7 +116,7 @@ const PostInputField = () => {
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
-        onCancel={() => setOpen(false)}
+        // onCancel={() => setOpen(false)}
       >
         <div>
           <div>

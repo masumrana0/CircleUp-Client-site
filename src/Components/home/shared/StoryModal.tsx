@@ -28,9 +28,9 @@ const StoryModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {/* <p>Some contents...</p>
         <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <p>Some contents...</p> */}
       </Modal>
     </>
   );

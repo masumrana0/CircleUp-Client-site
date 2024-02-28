@@ -6,6 +6,7 @@ import { AiTwotoneCamera } from "react-icons/ai";
 import { HiFaceSmile } from "react-icons/hi2";
 import Avatar from "../shared/Avatar";
 import FeedPostCard from "../home/shared/FeedPostCard";
+import { useProfileCommonDataQuery } from "@/Redux/api/profileApi";
 
 const PostInputField = () => {
   const [isCollapse, setCollapse] = useState(false);
@@ -13,8 +14,9 @@ const PostInputField = () => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState();
 
-  // redux 
-  // const data=useG
+  // redux
+  const { data } = useProfileCommonDataQuery(null);
+  console.log(data);
 
   // isCollapse ? console.log("hello") : console.log("gello");
 
@@ -70,7 +72,7 @@ const PostInputField = () => {
           className="p-5 flex items-center   "
           onClick={() => setCollapse(true)}
         >
-          <Avatar />
+          <Avatar src={data?.profilePicture} />
           <div className="w-full">
             <form>
               <input
@@ -118,8 +120,7 @@ const PostInputField = () => {
       >
         <div>
           <div>
-            <Avatar />
-
+            <Avatar src={data?.profilePicture} />
           </div>
         </div>
       </Modal>

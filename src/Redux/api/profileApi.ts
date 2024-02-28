@@ -1,17 +1,16 @@
-import { ILoginUserResponse } from "@/types/auth";
 import { baseApi } from "./baseApi";
 
 const profileApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllComment: build.query({
-      query: (postid) => ({
-        url: `/comment/${postid}`,
+    profileCommonData: build.query({
+      query: () => ({
+        url: `profile/common`,
         method: "GET",
       }),
-      providesTags: ["comment"],
+      providesTags: ["profile"],
     }),
   }),
   overrideExisting: false,
 });
 
-// export const { useRegisterMutation, useLoginMutation } = profileApi;
+export const { useProfileCommonDataQuery } = profileApi;

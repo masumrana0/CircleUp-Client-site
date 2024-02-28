@@ -141,21 +141,13 @@ const FeedPostCard = () => {
               />
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-[425px]  bg-white">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold">
-                  Create Post
-                </DialogTitle>
-              </DialogHeader>
+            <div className="sm:max-w-[425px]  bg-white">
+              <div>
+                <div className="text-2xl font-bold">Create Post</div>
+              </div>
               <hr />
               <div className="flex gap-3 items-center">
-                <Avatar className="w-8 h-8">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <Avatar />
                 <div>
                   <p className="font-bold text-md">Samsul kobir</p>
                   <Select>
@@ -174,7 +166,7 @@ const FeedPostCard = () => {
               </div>
               <Textarea
                 name="post"
-                value={postText}
+                // value={postText}
                 className="w-full outline-none  text-xl py-4"
                 onChange={(e) => setPostText(e.target.value)}
                 placeholder="What's on your mind?"
@@ -202,7 +194,7 @@ const FeedPostCard = () => {
                     ))}
                 </div>
               </div>
-              <DialogFooter className="flex justify-between items-center sm:justify-between">
+              <div className="flex justify-between items-center sm:justify-between">
                 <div className="flex gap-4">
                   <label htmlFor="uploadImage">
                     <input
@@ -213,7 +205,6 @@ const FeedPostCard = () => {
                       className="hidden"
                       onChange={(e) => handleSubmitImage(e)}
                     />
-                    <MdPermMedia className="text-violet-500 text-2xl cursor-pointer" />
                   </label>
 
                   <BsEmojiSmileFill className="text-violet-500 text-2xl cursor-pointer" />
@@ -228,8 +219,8 @@ const FeedPostCard = () => {
                   Post
                 </button>
                 {/* </DialogClose> */}
-              </DialogFooter>
-            </DialogContent>
+              </div>
+            </div>
           </Dialog>
         </div>
         <Button

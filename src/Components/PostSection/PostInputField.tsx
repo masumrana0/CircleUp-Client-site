@@ -12,20 +12,11 @@ const PostInputField = () => {
   const [isCollapse, setCollapse] = useState(false);
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState();
 
   // redux
   const { data } = useProfileCommonDataQuery(null);
-  console.log(data);
-
-  // isCollapse ? console.log("hello") : console.log("gello");
-
-  const showModal = () => {
-    setOpen(true);
-  };
 
   const handleOk = () => {
-    // setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
@@ -35,11 +26,12 @@ const PostInputField = () => {
 
   const handleCancel = () => {
     setOpen(false);
+    ("hello");
   };
 
   return (
     <div
-      onClick={showModal}
+      onClick={() => setOpen(true)}
       className={`bg-gray-50 shadow     h-[120px]  rounded-xl border-2 overflow-hidden`}
     >
       {/* header  */}
@@ -80,7 +72,7 @@ const PostInputField = () => {
                 className="outline-none bg-gray-50  w-full p-2 text-sm    rounded-md "
                 placeholder=" What are you thinking about?"
               />
-              {/* <button>Publish</button> */}
+
               <div className="float-right">
                 <HiFaceSmile />
               </div>
@@ -90,7 +82,7 @@ const PostInputField = () => {
       </div>
 
       <div>
-        {isCollapse && (
+        {/* {isCollapse && (
           <div>
             <div className="h-[19rem]"></div>
             <div className="    ">
@@ -108,21 +100,33 @@ const PostInputField = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
-      <Modal
+      {/* <Modal
         width={840}
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
-        // onCancel={() => setOpen(false)}
+        onCancel={handleCancel}
       >
         <div>
           <div>
             <Avatar src={data?.profilePicture} />
           </div>
         </div>
+      </Modal> */}
+
+      <Modal
+        title="20px to Top"
+        style={{ top: 20 }}
+        open={open}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+      >
+        <p>some contents...</p>
+        <p>some contents...</p>
+        <p>some contents...</p>
       </Modal>
     </div>
   );

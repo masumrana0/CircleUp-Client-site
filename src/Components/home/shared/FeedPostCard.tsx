@@ -24,7 +24,7 @@ import {
 import { BiXCircle } from "react-icons/bi";
 import { Textarea } from "@/Components/ui/textarea";
 import { useGetAllPostQuery, useSubmitPostMutation } from "@/Redux/api/postApi";
-import { useAppSelector } from "@/Redux/hooks";
+ 
 import { IPost } from "@/types/newsfeed";
 import Image from "next/image";
 import React, { FormEvent, useState } from "react";
@@ -35,12 +35,11 @@ import { MdPermMedia } from "react-icons/md";
 const FeedPostCard = () => {
   const [postText, setPostText] = useState("Hello i am masum Rana");
   const [isLoading, setIsLoading] = useState(false);
-  // const [images, setImages] = useState(null);
   const [imgs, setImg] = useState([]);
   const [imgsPath, setImgsPath] = useState([]);
   const [imgUrls, setImgUrl] = useState([]);
   const [submitPost, options] = useSubmitPostMutation();
-  // const theme = useAppSelector((state) => state.themeSlice.theme);
+
   const theme = "light";
   const { data: allPost } = useGetAllPostQuery(null);
 

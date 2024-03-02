@@ -1,3 +1,11 @@
+/**
+ * Title: 'Story section'
+ * Description: ''
+ * Author: 'Masum Rana'
+ * Date: 02-03-2024
+ *
+*/
+
 import type { MenuProps } from "antd";
 import SuggestedFriendsLabel from "../Labels/SuggestedFriendsLabel";
 
